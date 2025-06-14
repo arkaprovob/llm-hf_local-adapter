@@ -1,0 +1,66 @@
+# LiteLLM Proxy Configuration for HuggingFace Local Models
+
+model_list:
+  # Phi-2 Model
+  - model_name: "phi-2-local"
+    litellm_params:
+      model: "huggingface-local/phi-2"
+      # Optional: Add default parameters
+      temperature: 0.7
+      max_tokens: 512
+      
+  # Example with 4-bit quantization
+  - model_name: "phi-2-4bit"
+    litellm_params:
+      model: "huggingface-local-4bit/phi-2"
+      temperature: 0.7
+      max_tokens: 512
+      
+  # Example with Llama model
+  - model_name: "llama-7b-local"
+    litellm_params:
+      model: "llama-local/llama-2-7b"
+      temperature: 0.7
+      max_tokens: 1024
+      
+  # Example with custom parameters
+  - model_name: "phi-2-creative"
+    litellm_params:
+      model: "huggingface-local/phi-2"
+      temperature: 0.9
+      top_p: 0.95
+      repetition_penalty: 1.2
+      optional_params:
+        no_repeat_ngram_size: 3
+
+# LiteLLM Settings
+litellm_settings:
+  # Register custom providers
+  custom_provider_map:
+    - provider: "huggingface-local"
+      custom_handler: custom_handler.phi2_adapter
+    - provider: "huggingface-local-4bit"
+      custom_handler: custom_handler.phi2_4bit_adapter
+    - provider: "llama-local"
+      custom_handler: custom_handler.llama_adapter
+      
+  # Optional: Set default timeout
+  timeout: 300
+  
+  # Optional: Enable debug mode
+  # debug: true
+  
+  # Optional: Set cache settings
+  # cache: true
+  # cache_ttl: 3600
+
+# General Settings
+general_settings:
+  # Master key for authentication
+  master_key: "sk-your-master-key-here"
+  
+  # Database URL for tracking
+  # database_url: "postgresql://user:password@localhost:5432/litellm"
+  
+  # Optional: Custom auth
+  # custom_auth: custom_auth.custom_auth_function 

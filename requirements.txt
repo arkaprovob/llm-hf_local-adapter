@@ -1,0 +1,19 @@
+# Core dependencies
+litellm>=1.0.0
+torch>=2.0.0
+transformers>=4.30.0
+accelerate>=0.20.0
+
+# For async support
+asyncio
+
+# Optional: For 4-bit quantization
+bitsandbytes>=0.40.0
+
+# Optional: For better tokenizer performance
+sentencepiece
+protobuf
+
+# Optional: For running the Flask example
+flask
+flask-cors 

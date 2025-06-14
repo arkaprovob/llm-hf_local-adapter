@@ -1,0 +1,52 @@
+[project]
+name = "llm-hf-local-adapter"
+version = "0.2.0"
+description = "HuggingFace Local Adapters (V1 & V2) for LiteLLM - Run HuggingFace models locally with advanced features like automatic chat templates, quantization, and streaming"
+requires-python = ">=3.8"
+dependencies = [
+    "litellm>=1.0.0",
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "accelerate>=0.20.0",
+]
+
+[project.optional-dependencies]
+quantization = [
+    "bitsandbytes>=0.40.0",
+]
+tokenizer = [
+    "sentencepiece",
+    "protobuf",
+]
+server = [
+    "flask",
+    "flask-cors",
+]
+all = [
+    "bitsandbytes>=0.40.0",
+    "sentencepiece",
+    "protobuf",
+    "flask",
+    "flask-cors",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/llm-hf-local-adapter"
+Documentation = "https://github.com/yourusername/llm-hf-local-adapter#readme"
+Issues = "https://github.com/yourusername/llm-hf-local-adapter/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Include specific Python files in the root directory
+include = [
+    "huggingface_local_adapter.py",
+    "huggingface_local_adapter_v2.py",
+    "custom_handler.py",
+]
