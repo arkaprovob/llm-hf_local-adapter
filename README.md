@@ -93,7 +93,7 @@ pip install bitsandbytes
 
 ```python
 import litellm
-from huggingface_local_adapter import HuggingFaceLocalAdapter
+from archive.huggingface_local_adapter import HuggingFaceLocalAdapter
 
 # Create adapter
 adapter = HuggingFaceLocalAdapter(
@@ -150,7 +150,7 @@ asyncio.run(main())
 
 ```python
 # custom_handler.py
-from huggingface_local_adapter import HuggingFaceLocalAdapter
+from archive.huggingface_local_adapter import HuggingFaceLocalAdapter
 
 phi2_adapter = HuggingFaceLocalAdapter(
     model_id="microsoft/phi-2",
@@ -257,7 +257,7 @@ For more advanced use cases, we provide a V2 adapter (`huggingface_local_adapter
 ### V2 Quick Start
 
 ```python
-from huggingface_local_adapter_v2 import HuggingFaceLocalAdapterV2, ModelConfig
+from archive.huggingface_local_adapter_v2 import HuggingFaceLocalAdapterV2, ModelConfig
 
 # Create adapter with automatic chat template detection
 config = ModelConfig(
@@ -291,7 +291,7 @@ response = litellm.completion(
 The V2 adapter includes pre-configured adapters for popular models:
 
 ```python
-from huggingface_local_adapter_v2 import (
+from archive.huggingface_local_adapter_v2 import (
     create_llama2_adapter,
     create_mistral_adapter,
     create_falcon_adapter

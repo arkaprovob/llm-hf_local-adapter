@@ -52,7 +52,10 @@ class GenerationParameterManager:
         """Prepare generation kwargs by merging defaults with provided kwargs."""
         gen_kwargs = self.default_params.copy()
         
-        # Override with any provided kwargs
+        # List of LiteLLM-specific parameters to exclude
+        litellm_params = {"stream", "messages", "prompt", "model", "api_key", "api_base"}
+        
+        # Override with any provided kwargs (excluding LiteLLM-specific ones)
         for key in ["temperature", "top_p", "top_k", "max_new_tokens", 
                     "repetition_penalty", "do_sample"]:
             if key in kwargs:
@@ -65,8 +68,10 @@ class GenerationParameterManager:
         if "pad_token_id" not in gen_kwargs and self.tokenizer.pad_token_id is not None:
             gen_kwargs["pad_token_id"] = self.tokenizer.pad_token_id
         
-        # Add any additional kwargs from optional_params
+        # Add any additional kwargs from optional_params (excluding LiteLLM params)
         optional_params = kwargs.get("optional_params", {})
-        gen_kwargs.update(optional_params)
+        for key, value in optional_params.items():
+            if key not in litellm_params:
+                gen_kwargs[key] = value
         
         return gen_kwargs 
